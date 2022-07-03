@@ -12,11 +12,12 @@ namespace Wully.MoreSlots
         public Vector3 localPosition;
         public Vector3 localRotation;
         public string ragdollPartName;
-        public bool scaleToPlayer = false;
+        public float triggerColliderRadius = 0.15f;
+        public bool enabled = true;
 
         public override string ToString()
         {
-            return $"{nameof(holderDataId)}: {holderDataId}, {nameof(handSide)}: {handSide}, {nameof(localPosition)}: {localPosition}, {nameof(localRotation)}: {localRotation}, {nameof(ragdollPartName)}: {ragdollPartName}, {nameof(scaleToPlayer)}: {scaleToPlayer}";
+            return $"{nameof(holderDataId)}: {holderDataId}, {nameof(handSide)}: {handSide}, {nameof(localPosition)}: {localPosition}, {nameof(localRotation)}: {localRotation}, {nameof(ragdollPartName)}: {ragdollPartName}, {nameof(triggerColliderRadius)}: {triggerColliderRadius}";
         }
     }
 }

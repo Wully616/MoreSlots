@@ -1,19 +1,19 @@
 ﻿{
 	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
-	"id": "LowerBackholder",
+	"id": "MouthHolder",
 	"version": 0,
 	"holderDataId": "HolderHips",
 	"handSide": "Both",
 	"localPosition": {
-		"x": -0.1,
-		"y": 0,
-		"z": -0.20
+		"x": 0,
+		"y": -0.06,
+		"z": 0.15
 	},
 	"localRotation": {
-		"x": 0.0,
-		"y": 90.0,
-		"z": 270.0
+		"x": -90,
+		"y": 0,
+		"z": -85
 	},
-	"ragdollPartName": "Spine",
+	"ragdollPartName": "Head",
 	"enabled":  true
 }

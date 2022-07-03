@@ -15,5 +15,5 @@
 		"z": 270.0
 	},
 	"ragdollPartName": "Spine",
-	"scaleToPlayer":  true
+	"enabled":  true
 }

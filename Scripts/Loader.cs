@@ -6,14 +6,32 @@ namespace Wully.MoreSlots
 {
     public class Loader : CustomData
     {
-        private List<MoreSlotsHolder> moreSlotsHolders;
-        private List<MoreSlotsData> moreSlotsDatas;
+        
+        public bool debug;
 
+        private List<Holder> holders;
+        private List<MoreSlotsData> moreSlotsDatas;
+        private Dictionary<string, MoreSlotsData> dataLookup;
+
+        public static Loader local;
+        
         public override void OnCatalogRefresh()
         {
+            //Only want one instance of the loader running
+            if (local != null) return;
+            local = this;
+            
             Debug.Log($"MoreSlots Loader!");
+            
             moreSlotsDatas = Catalog.GetDataList<MoreSlotsData>();
-            moreSlotsHolders = new List<MoreSlotsHolder>(moreSlotsDatas.Count);
+
+            dataLookup = new Dictionary<string, MoreSlotsData>();
+            foreach (MoreSlotsData moreSlotsData in moreSlotsDatas)
+            {
+                dataLookup[moreSlotsData.id] = moreSlotsData;
+            }
+
+            holders = new List<Holder>(moreSlotsDatas.Count);
             EventManager.onPossess += EventManagerOnPossess;
         }
 
@@ -22,34 +40,70 @@ namespace Wully.MoreSlots
             if (eventTime == EventTime.OnStart) return;
             if (!Player.currentCreature) return; // no creature set, return
             DestroySlots();
+            OverrideExistingSlots();
             AddSlots();
+        }
+        
+        protected void DestroySlots()
+        {
+            //remove old ones
+            int count = holders.Count;
+            for (var i = 0; i < count; i++)
+            {
+                var customHolder = holders[i];
+                //destroy it if its a moreslotsholder
 
+                if (customHolder && customHolder is MoreSlotsHolder)
+                {
+                    Debug.Log($"Destroying old slot: {customHolder.name}");
+                    GameObject.Destroy(customHolder);
+                }
+            }
         }
 
+        private void OverrideExistingSlots()
+        { 
+            //Get all the current slots, this should get the base game slots - and possibly other modders ones
+            Holder[] currentHolders = Player.currentCreature.gameObject.GetComponentsInChildren<Holder>();
+            foreach (var currentHolder in currentHolders)
+            {
+                // skip holders which may be on items in the players current holders
+                if (currentHolder.parentItem) continue; 
+                
+                //check if the holder is in our data to check if needs to be moved or disabled
+                if (dataLookup.TryGetValue(currentHolder.name, out var moreSlotsData))
+                {
+                    Debug.Log($"Overriding existing holder {currentHolder.name} with MoreSlots configuration {moreSlotsData.ToString()}");
+                    //found data to override this holder with
+                    currentHolder.gameObject.SetActive(moreSlotsData.enabled); // enable/disable the slot
+
+                    //override position
+                    if(moreSlotsData.localPosition != Vector3.zero) currentHolder.transform.localPosition = moreSlotsData.localPosition;
+                    if(moreSlotsData.localRotation != Vector3.zero) currentHolder.transform.localPosition = currentHolder.transform.localEulerAngles = moreSlotsData.localRotation;
+                    
+                    //remove this holderData from the list, so we dont try to create a duplicate
+                    dataLookup.Remove(currentHolder.name);
+                    moreSlotsDatas.Remove(moreSlotsData);
+                }
+                holders.Add(currentHolder);
+            }
+        }
+        
         protected void AddSlots()
         {
             // add holders to the player
-            moreSlotsHolders.Clear();
             int count = moreSlotsDatas.Count;
             for (var i = 0; i < count; i++)
             {
                 MoreSlotsData customHolder = moreSlotsDatas[i];
-                Debug.Log($"Attempting to add customHolderData:{customHolder}");
-                CreateHolder(customHolder);
+                if (customHolder.enabled)
+                {
+                    Debug.Log($"Attempting to add customHolderData:{customHolder}");
+                    CreateHolder(customHolder);
+                }
             }
         }
-
-        protected void DestroySlots()
-        {
-            //remove old ones
-            int count = moreSlotsHolders.Count;
-            for (var i = 0; i < count; i++)
-            {
-                var customHolder = moreSlotsHolders[i];
-                //destroy it
-                if (customHolder) GameObject.Destroy(customHolder);
-            }
-        }
+  
 
         private void CreateHolder(MoreSlotsData moreSlotsData)
         {
@@ -62,7 +116,7 @@ namespace Wully.MoreSlots
             }
 
             // create a new object to hold the holder.
-            GameObject holderGameObject = new GameObject($"{moreSlotsData.id}-holder");
+            GameObject holderGameObject = new GameObject($"{moreSlotsData.id}");
 
             //parent our holderGameobject under the ragdollpart
             Transform holderTransform = holderGameObject.transform;
@@ -76,22 +130,22 @@ namespace Wully.MoreSlots
             MoreSlotsHolder holder = holderGameObject.AddComponent<MoreSlotsHolder>();
 
             //Add it to our list so we can clean it up later
-            moreSlotsHolders.Add(holder);
+            holders.Add(holder);
 
             //not really needed since were not doing custom stuff, but useful to have references to the data which created this holder on the holder itself
             holder.moreSlotsData = moreSlotsData;
             holder.part = part;
 
-            //add the touch collider
-            SphereCollider sphereCollider = holderGameObject.AddComponent<SphereCollider>();
-            sphereCollider.radius = 0.15f;
-            sphereCollider.isTrigger = true;
-            holder.touchCollider = sphereCollider;
+            //setup the touch collider
+            (holder.touchCollider as SphereCollider).radius = moreSlotsData.triggerColliderRadius;
 
             //Add holderdata
             holder.ignoredColliders = new List<Collider>();
             holder.Load(data);
 
+            //Override player hand touching
+            holder.data.forceAllowTouchOnPlayer = false;
+            holder.data.disableTouch = false;
             holder.allowedHandSide = moreSlotsData.handSide;
 
             holder.RefreshChildAndParentHolder();

@@ -15,5 +15,5 @@
 		"z": 180.0
 	},
 	"ragdollPartName": "LeftLeg",
-	"scaleToPlayer":  true
+	"enabled":  true
 }

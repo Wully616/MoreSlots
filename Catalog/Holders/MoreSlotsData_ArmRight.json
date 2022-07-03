@@ -15,5 +15,5 @@
 		"z": 0
 	},
 	"ragdollPartName": "RightArm",
-	"scaleToPlayer":  true
+	"enabled":  true
 }
