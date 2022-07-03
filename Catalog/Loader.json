@@ -1,4 +1,4 @@
 {
-	"$type": "MoreSlots.Scripts.Loader, MoreSlots",
+	"$type": "Wully.MoreSlots.Loader, MoreSlots",
 	"id": "MoreSlotsLoader"	
 }
