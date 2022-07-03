@@ -1,0 +1,20 @@
+﻿{
+	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
+	"id": "ChestLeftholder",
+	"version": 0,
+	"holderDataId": "HolderHips",
+	"handSide": "Both",
+	"localPosition": {
+		"x": -0.1,
+		"y": 0.1,
+		"z": 0.20
+	},
+	"localRotation": {
+		"x": -15,
+		"y": 90,
+		"z": 90
+	},
+	"ragdollPartName": "Spine1",
+	"ignoreCollisionsWithPlayerHands": false,
+	"scaleToPlayer":  true
+}

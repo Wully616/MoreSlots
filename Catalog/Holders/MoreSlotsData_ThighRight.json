@@ -1,0 +1,19 @@
+﻿{
+	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
+	"id": "ThighRightholder",
+	"version": 0,
+	"holderDataId": "HolderHips",
+	"handSide": "Both",
+	"localPosition": {
+		"x": -0.28,
+		"y": -0.1,
+		"z": 0.01
+	},
+	"localRotation": {
+		"x": 0,
+		"y": -90,
+		"z": -185
+	},
+	"ragdollPartName": "RightUpLeg",
+	"scaleToPlayer":  true
+}

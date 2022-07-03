@@ -2,7 +2,8 @@
 using ThunderRoad;
 using UnityEngine;
 
-namespace Wully.Data {
+namespace Wully.MoreSlots
+{
 
 	[Serializable]
 	public class MoreSlotsData : CustomData {

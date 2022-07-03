@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using MoreSlots.Scripts.Holders;
+
 using ThunderRoad;
 using UnityEngine;
-using Wully.Data;
-
-namespace MoreSlots.Scripts
+namespace Wully.MoreSlots
 {
     public class Loader : CustomData
     {
@@ -63,6 +60,12 @@ namespace MoreSlots.Scripts
                 moreSlotsHolders.Add(holder);
                 holder.moreSlotsData = moreSlotsData;
                 holder.part = part;
+                
+                //add the touch collider
+                SphereCollider sphereCollider = holderGameObject.AddComponent<SphereCollider>();
+                sphereCollider.radius = 0.15f;
+                sphereCollider.isTrigger = true;
+                holder.touchCollider = sphereCollider;
                 
                 //Add holderdata
                 holder.ignoredColliders = new List<Collider>();

@@ -1,0 +1,25 @@
+﻿{
+	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
+	"id": "WristRightholder",
+	"version": 0,
+	"holderDataId": "HolderHips",
+	"handSide": "Left",
+	"localPosition": {
+		"x": -0.22,
+		"y": 0.025,
+		"z": -0.01
+	},
+	"localRotation": {
+		"x": 0.25,
+		"y": -90,
+		"z": 0.0
+	},
+	"ragdollPartName": "RightForeArm",
+	"scaleToPlayer":  true,
+	"rotateRelativeTo": "RightHand",
+	"relativeRotationOffset": {
+		"x": 0,
+		"y": 0,
+		"z": 180.0
+	}
+}

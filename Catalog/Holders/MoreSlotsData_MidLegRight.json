@@ -1,0 +1,19 @@
+﻿{
+	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
+	"id": "MidLegRightholder",
+	"version": 0,
+	"holderDataId": "HolderHips",
+	"handSide": "Both",
+	"localPosition": {
+		"x": -0.24,
+		"y": -0.1,
+		"z": 0.02
+	},
+	"localRotation": {
+		"x": 180.0,
+		"y": 80.0,
+		"z": 0
+	},
+	"ragdollPartName": "RightLeg",
+	"scaleToPlayer":  true
+}

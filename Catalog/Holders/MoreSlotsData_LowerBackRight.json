@@ -1,0 +1,19 @@
+﻿{
+	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
+	"id": "LowerBackRightholder",
+	"version": 0,
+	"holderDataId": "HolderHips",
+	"handSide": "Right",
+	"localPosition": {
+		"x": 0.1,
+		"y":  0.1,
+		"z": -0.2
+	},
+	"localRotation": {
+		"x": 15,
+		"y": 95.0,
+		"z": 270.0
+	},
+	"ragdollPartName": "Spine",
+	"scaleToPlayer":  true
+}
