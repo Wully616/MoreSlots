@@ -11,15 +11,13 @@ namespace Wully.MoreSlots
         {
             //Get the creatures inventory container
             Debug.Log($"MoreSlotsHolder Awake called");
-            
-            
+
             //set this holders container to the creatures
             linkedContainer = Player.local.creature.container;
-            
+
             //manually call content load to populate this holder with contents of the container if appropriate
             OnLinkedContainerContentLoad();
             base.Awake();
         }
-        
     }
 }
