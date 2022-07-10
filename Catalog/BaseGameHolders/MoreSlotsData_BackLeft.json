@@ -2,5 +2,5 @@
 	"$type": "Wully.MoreSlots.MoreSlotsData, MoreSlots",
 	"id": "BackLeft",
 	"version": 0,
-	"enabled": "true"
+	"enabled": true
 }

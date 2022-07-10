@@ -17,7 +17,7 @@ namespace Wully.MoreSlots
 
         public override string ToString()
         {
-            return $"{nameof(holderDataId)}: {holderDataId}, {nameof(handSide)}: {handSide}, {nameof(localPosition)}: {localPosition}, {nameof(localRotation)}: {localRotation}, {nameof(ragdollPartName)}: {ragdollPartName}, {nameof(triggerColliderRadius)}: {triggerColliderRadius}";
+            return $"{nameof(holderDataId)}: {holderDataId}, {nameof(handSide)}: {handSide}, {nameof(localPosition)}: {localPosition}, {nameof(localRotation)}: {localRotation}, {nameof(ragdollPartName)}: {ragdollPartName}, {nameof(triggerColliderRadius)}: {triggerColliderRadius}, {nameof(enabled)}: {enabled}";
         }
     }
 }

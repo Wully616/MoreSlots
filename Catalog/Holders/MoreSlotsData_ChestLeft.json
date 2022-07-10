@@ -14,5 +14,6 @@
 		"y": 90,
 		"z": 90
 	},
-	"ragdollPartName": "Spine1"
+	"ragdollPartName": "Spine1",
+	"enabled":  true
 }
